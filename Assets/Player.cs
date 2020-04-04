@@ -9,8 +9,11 @@ public class Player : MonoBehaviour
     [Tooltip("In m")] [SerializeField] float xRange = 22f;
     [Tooltip("In m")] [SerializeField] float yRange = 17f;
 
-    [SerializeField] float positionPitchFactor = -0.5f;
-    [SerializeField] float controlFactor = -20f;
+    [SerializeField] float positionPitchFactor = -2.2f;
+    [SerializeField] float positionYawFactor = -2.2f;
+    [SerializeField] float controlPitchFactor = -18f;
+    [SerializeField] float controlRollFactor = -30f;
+    [SerializeField] float controlYawFactor = -10f;
 
 
     float yThrow;
@@ -82,20 +85,22 @@ public class Player : MonoBehaviour
     {
         float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
 
-        float pitchDueToThrow = yThrow * controlFactor;
+        float pitchDueToThrow = yThrow * controlPitchFactor;
         float pitch = pitchDueToPosition + pitchDueToThrow;
         return pitch;
     }
 
     private float ComputateYaw()
     {
-        float yaw = transform.localPosition.x * positionPitchFactor;
+        float yawDueToPitch = -transform.localPosition.x * positionYawFactor;
+        float yawDueToThrow = xThrow * controlYawFactor*.8f;
+        float yaw = yawDueToPitch + yawDueToThrow;
         return yaw;
     }
     
     private float ComputateRoll()
     {
-        float roll = xThrow * controlFactor;
+        float roll = xThrow * controlRollFactor;
         return roll;
     }
 
