@@ -33,6 +33,11 @@ public class Player : MonoBehaviour
         Rotate();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Player triggered something");
+    }
+
     bool SameSign(float a, float b)
     {
         if ((a < 0 && b < 0) || (a > 0 && b > 0) || (a >= b - Mathf.Epsilon && a <= b + Mathf.Epsilon))
