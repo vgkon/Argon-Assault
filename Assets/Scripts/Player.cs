@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] float controlRollFactor = -30f;
     [SerializeField] float controlYawFactor = -10f;
 
+    bool controlsActive = true;
 
     float yThrow;
     float prevYThrow;
@@ -28,14 +29,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ReactHorizontalInput();
-        ReactVerticalInput();
-        Rotate();
+        if (controlsActive)
+        {
+            ReactHorizontalInput();
+            ReactVerticalInput();
+            Rotate();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnPlayerDeath()
     {
-        print("Player triggered something");
+        controlsActive = false;
+        print("controls disabled");
     }
 
     bool SameSign(float a, float b)
