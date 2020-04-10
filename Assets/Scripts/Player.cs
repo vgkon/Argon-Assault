@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("General")] 
     [Tooltip("In m/s^-1")][SerializeField] float speed = 35f;
     [Tooltip("In m")] [SerializeField] float xRange = 22f;
     [Tooltip("In m")] [SerializeField] float yRange = 17f;
+    [SerializeField] GameObject[] guns;
 
+    [Header("Screen-position Based")]
     [SerializeField] float positionPitchFactor = -2.2f;
     [SerializeField] float positionYawFactor = -2.2f;
+
+    [Header("Control-throw Based")]
     [SerializeField] float controlPitchFactor = -18f;
     [SerializeField] float controlRollFactor = -30f;
     [SerializeField] float controlYawFactor = -10f;
@@ -34,6 +39,36 @@ public class Player : MonoBehaviour
             ReactHorizontalInput();
             ReactVerticalInput();
             Rotate();
+            ReactFiring();
+        }
+    }
+
+    private void ReactFiring()
+    {
+        if (Input.GetButton("Fire"))
+        { 
+            print("FIRING");
+            ActivateGuns();
+        }
+        else
+        {
+            DeactivateGuns();
+        }
+    }
+
+    private void DeactivateGuns()
+    {
+        foreach(GameObject gun in guns)
+        {
+            gun.SetActive(false);
+        }
+    }
+
+    private void ActivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(true);
         }
     }
 
