@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,14 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartDeathSequence();
+        if (other.tag == "Finish") StartWinSequence();
+        else StartDeathSequence();
+    }
+
+    private void StartWinSequence()
+    {
+        print("game Won");
+        gameObject.SendMessage("OnGameWon");
     }
 
     private void StartDeathSequence()

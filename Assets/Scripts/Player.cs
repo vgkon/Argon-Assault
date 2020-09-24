@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     [SerializeField] float controlRollFactor = -30f;
     [SerializeField] float controlYawFactor = -10f;
 
+    [SerializeField] Canvas escMenu;
+    [SerializeField] Canvas winMenu;
+    [SerializeField] Canvas points;
     bool controlsActive = true;
 
     float yThrow;
@@ -28,7 +31,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -36,10 +38,30 @@ public class Player : MonoBehaviour
     {
         if (controlsActive)
         {
+            ReactEscapeInput();
             ReactHorizontalInput();
             ReactVerticalInput();
             Rotate();
             ReactFiring();
+        }
+    }
+
+    private void OnGameWon()
+    {
+        points.enabled = false;
+        winMenu.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+    private void ReactEscapeInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            points.enabled = false;
+            escMenu.enabled = true;
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -48,11 +70,11 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Fire"))
         { 
             print("FIRING");
-            ActivateGuns();
+            ActivateGuns(true);
         }
         else
         {
-            DeactivateGuns();
+            ActivateGuns(false);
         }
     }
 
@@ -64,11 +86,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void ActivateGuns()
+    private void ActivateGuns(bool emission)
     {
         foreach (GameObject gun in guns)
         {
-            gun.SetActive(true);
+            var emissionModule = gun.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = emission;
+            print(emissionModule.enabled);
         }
     }
 

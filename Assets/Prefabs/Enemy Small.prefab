@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8676062080583374548}
-  m_LocalRotation: {x: -0.5032874, y: -0.34983584, z: -0.23322333, w: 0.7549328}
-  m_LocalPosition: {x: 609.86, y: 142.82, z: 593.4}
+  m_LocalRotation: {x: -0.6195228, y: -0.30717978, z: -0.28708678, w: 0.66288257}
+  m_LocalPosition: {x: 713.9983, y: 124.02493, z: 299.3552}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -67.380005, y: -49.726, z: 0}
+  m_LocalEulerAnglesHint: {x: -86.12701, y: -49.726, z: 0}
 --- !u!33 &8654916659625201790
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -109,3 +109,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1867258023276327771, guid: 39708254436e06d45b00dd7fde5d31c6, type: 3}
   parent: {fileID: 0}
+  scorePerHit: 12
+  hits: 4

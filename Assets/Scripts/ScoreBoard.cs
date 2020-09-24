@@ -18,7 +18,6 @@ public class ScoreBoard : MonoBehaviour
     void Update()
     {
         score += Time.deltaTime;
-        print(Mathf.FloorToInt(score));
         scoreText.text = Mathf.FloorToInt(score).ToString();
     }
     public void ScoreHit(int scorePerHit)
